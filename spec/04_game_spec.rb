@@ -46,7 +46,7 @@ describe 'Game' do
       player_1 = Player.new("X")
       player_2 = Player.new("O")
 
-      game = Game.new(player_1, player_2, board)
+      game = Game.new(player_1,player_2,board)
 
       expect(game.player_1).to eq(player_1)
       expect(game.player_2).to eq(player_2)
@@ -56,10 +56,10 @@ describe 'Game' do
     it 'defaults to two human players, X and O, with an empty board' do
       game = Game.new
 
-      expect(game.player_1).to be_a(Players::Human)
+      expect(game.player_1).to be_a(Player::Human)
       expect(game.player_1.token).to eq("X")
 
-      expect(game.player_2).to be_a(Players::Human)
+      expect(game.player_2).to be_a(Player::Human)
       expect(game.player_2.token).to eq("O")
 
       expect(game.board.cells).to match_array(Array.new(9, " "))
@@ -111,7 +111,7 @@ describe 'Game' do
     end
 
     it 'returns false for a won game' do
-      game = Game.new
+      game = Game.new(Player.new("X"),Player.new("O"),Board.new)
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.draw?).to be_falsey
