@@ -34,11 +34,10 @@ class Game
   end
 
   def winner
-    game = self
     WIN_COMBINATIONS.detect do |win_combo|
-      if (game.board.cells[win_combo[0]]) == "X" && (game.board.cells[win_combo[1]]) == "X" && (game.board.cells[win_combo[2]]) == "X"
+      if (@board.cells[win_combo[0]]) == "X" && (@board.cells[win_combo[1]]) == "X" && (@board.cells[win_combo[2]]) == "X"
         return "X"
-      elsif (game.board.cells[win_combo[0]]) == "O" && (game.board.cells[win_combo[1]]) == "O" && (game.board.cells[win_combo[2]]) == "O"
+      elsif (@board.cells[win_combo[0]]) == "O" && (@board.cells[win_combo[1]]) == "O" && (@board.cells[win_combo[2]]) == "O"
         return "O"
       else
         nil
