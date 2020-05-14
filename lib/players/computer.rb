@@ -7,6 +7,7 @@ class Player::Computer < Player
   def move(board)
     @board = board
     @input = " "
+    block_alg_weakness
     check_win_combos
     check_center
     check_corners
@@ -15,14 +16,22 @@ class Player::Computer < Player
     @move.to_s
   end
 
+  def block_alg_weakness
+    if @board.taken_and_equal(1,3) && !@board.taken?("1")
+      @input = 0
+    end
+  end
+
   def check_win_combos
-    WIN_COMBINATIONS.each do |combo|
-      if @board.taken_and_equal(combo[0],combo[1]) && !@board.taken?((combo[2]+1).to_s)
-        @input = combo[2]
-      elsif @board.taken_and_equal(combo[1],combo[2]) && !@board.taken?((combo[0]+1).to_s)
-        @input = combo[0]
-      elsif @board.taken_and_equal(combo[0],combo[2]) && !@board.taken?((combo[1]+1).to_s)
-        @input = combo[1]
+    if (@input == " ")
+      WIN_COMBINATIONS.each do |combo|
+        if @board.taken_and_equal(combo[0],combo[1]) && !@board.taken?((combo[2]+1).to_s)
+          @input = combo[2]
+        elsif @board.taken_and_equal(combo[1],combo[2]) && !@board.taken?((combo[0]+1).to_s)
+          @input = combo[0]
+        elsif @board.taken_and_equal(combo[0],combo[2]) && !@board.taken?((combo[1]+1).to_s)
+          @input = combo[1]
+        end
       end
     end
   end

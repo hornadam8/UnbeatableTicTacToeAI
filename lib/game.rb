@@ -46,6 +46,7 @@ class Game
   end
 
   def turn
+    @board.empty? ? @board.display : nil
     puts "Please enter a number 1-9:"
     @user_input = current_player.move(@board)
     if @board.valid_move?(@user_input)
